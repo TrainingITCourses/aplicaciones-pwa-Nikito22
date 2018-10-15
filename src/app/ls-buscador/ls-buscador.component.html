@@ -1,0 +1,8 @@
+<span *ngIf="isa$ | async as isa">
+  <label>Buscar por: </label>
+  <select [value]="-1" (change)="alCambiarTipoCriterio($event)">
+    <option *ngFor="let e of isa.tiposCriterios" [value]="e">{{e}}</option>
+  </select>
+</span>
+<ls-buscador-criterios></ls-buscador-criterios>
+<ls-buscador-lanzamientos></ls-buscador-lanzamientos>

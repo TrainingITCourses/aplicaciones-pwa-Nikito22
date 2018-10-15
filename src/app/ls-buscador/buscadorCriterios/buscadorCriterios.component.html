@@ -1,0 +1,5 @@
+<span *ngIf="isa$ | async as isa">
+  <select (change)="onCambioCriterio($event)">
+    <option [value]='o.value' *ngFor="let o of isa.criterios"> {{o.viewValue}} </option>
+  </select>
+</span>
