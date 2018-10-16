@@ -2,8 +2,7 @@ import { State } from '../../store/index';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { CambiarCriterio } from 'app/store/isa.actions';
-
+import { CambiarCriterio } from '../../store/isa.actions';
 
 @Component({
   selector: 'ls-buscador-criterios',

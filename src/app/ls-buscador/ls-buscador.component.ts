@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { State } from '../store/isa.reducer';
+import { State, enTipoCriterio } from '../store/isa.reducer';
 import { CambiarTipoCriterio, CambiarCriterio } from '../store/isa.actions';
 
 @Component({
@@ -13,6 +13,8 @@ import { CambiarTipoCriterio, CambiarCriterio } from '../store/isa.actions';
 export class LsBuscadorComponent implements OnInit {
 
     public isa$: Observable<any>;
+    public tiposCriterios = Object.keys(enTipoCriterio).slice(Object.keys(enTipoCriterio).length / 2);
+
 
     constructor(public store: Store<State>) { }
 
@@ -22,6 +24,6 @@ export class LsBuscadorComponent implements OnInit {
 
     alCambiarTipoCriterio(event) {
         this.store.dispatch(new CambiarTipoCriterio(event.target.selectedIndex));
-        this.store.dispatch(new CambiarCriterio('1')); // cargamos los lanzamientos del primer valor de los criterios
+        this.store.dispatch(new CambiarCriterio(1)); // cargamos los lanzamientos del primer valor de los criterios
     }
 }

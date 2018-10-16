@@ -1,6 +1,6 @@
-<div *ngIf="isa$ | async as isa">
+<div>
     <ol>
-        <li *ngFor="let l of isa.lanzamientos">
+        <li *ngFor="let l of (isa$ | async).lanzamientos">
             {{l.name}} <span>{{l.launchDate}}</span>
         </li>
     </ol>

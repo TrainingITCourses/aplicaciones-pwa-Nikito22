@@ -14,12 +14,12 @@ export class CambiarTipoCriterio implements Action {
 }
 export class TipoCriterioCambiado implements Action {
   public readonly type = IsaActionTypes.TipoCriterioCambiado;
-  constructor(public readonly payload: Selopt[]) { }
+  constructor(public readonly payload: any) { }
 }
 
 export class CambiarCriterio implements Action {
   public readonly type = IsaActionTypes.CambiarCriterio;
-  constructor(public readonly payload: string) { }
+  constructor(public readonly payload: number) { }
 }
 export class CriterioCambiado implements Action {
   public readonly type = IsaActionTypes.CriterioCambiado;

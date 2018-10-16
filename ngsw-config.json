@@ -1,26 +1,50 @@
 {
-  "index": "/index.html",
-  "assetGroups": [
-    {
-      "name": "app",
-      "installMode": "prefetch",
-      "resources": {
-        "files": [
-          "/favicon.ico",
-          "/index.html",
-          "/*.css",
-          "/*.js"
-        ]
-      }
+    "index": "/index.html",
+    "assetGroups": [{
+        "name": "app",
+        "installMode": "prefetch",
+        "resources": {
+            "files": [
+                "/favicon.ico",
+                "/index.html",
+                "/*.css",
+                "/*.js"
+            ]
+        }
     }, {
-      "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/assets/**"
-        ]
-      }
-    }
-  ]
+        "name": "assets",
+        "installMode": "lazy",
+        "updateMode": "prefetch",
+        "resources": {
+            "files": [
+                "/assets/**"
+            ]
+        }
+    }],
+    "dataGroups": [{
+            "name": "cache-first",
+            "urls": [
+                "http://127.0.0.1:8080/assets/json/launchstatus.json",
+                "http://127.0.0.1:8080/assets/json/launchagencies.json",
+                "http://127.0.0.1:8080/assets/json/launchmissions.json"
+            ],
+            "cacheConfig": {
+                "strategy": "performance",
+                "maxSize": 10,
+                "maxAge": "1d"
+            }
+        },
+        {
+            "name": "api-first",
+            "urls": [
+                "https://launchlibrary.net/1.4/launch/1950-01-01?limit=2000"
+            ],
+            "cacheConfig": {
+                "strategy": "freshness",
+                "maxSize": 100,
+                "maxAge": "6h",
+                "timeout": "14s"
+            }
+        }
+    ]
 }

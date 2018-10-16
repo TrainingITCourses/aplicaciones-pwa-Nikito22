@@ -1,71 +1,4 @@
-import { Action } from '@ngrx/store';
 import { IsaActionTypes, IsaActions } from './isa.actions';
-
-
-export interface State {
-  cargado: boolean;
-  // Valores expuestos por el store
-  tipoCriterio: enTipoCriterio;
-  criterios: Selopt[];
-  lanzamientos: Lanzamiento[];
-}
-
-export const initialState: State = {
-  cargado: false,
-  tipoCriterio: -1,
-  criterios: [],
-  lanzamientos: [],
-};
-
-export function reducer(state = initialState, action: IsaActions): State {
-  // switch (action.type) {
-  //   case IsaActionTypes.CargarCache:
-  //     return state;
-  //     break;
-
-  //   case IsaActionTypes.CacheCargado:
-  //     state.cache = action.payload;
-  //     state.cargado = true;
-  //     return { ...state };
-  //     break;
-
-  //   case IsaActionTypes.CacheNoCargado:
-  //     return state;
-  //     break;
-
-  //   case IsaActionTypes.CambiarTipoCriterio:
-  //     state.tipoCriterio = action.payload;
-  //     switch (action.payload) {
-  //       case enTipoCriterio.Estado:
-  //         state.criterios = state.cache.estados;
-  //         break;
-  //       case enTipoCriterio.Agencia:
-  //         state.criterios = state.cache.agencias;
-  //         break;
-  //       case enTipoCriterio.TipoMision:
-  //         state.criterios = state.cache.tiposMision;
-  //         break;
-  //     }
-  //     return { ...state };
-  //     break;
-
-  //   case IsaActionTypes.CambiarCriterio:
-  //     switch (state.tipoCriterio) {
-  //       case enTipoCriterio.Estado:
-  //         state.lanzamientos = [...state.cache.lanzamientos.filter(l => l.status === Number(action.payload))];
-  //         break;
-  //       case enTipoCriterio.Agencia:
-  //         state.lanzamientos = [...state.cache.lanzamientos.filter(l => l.agencyId === Number(action.payload))];
-  //         break;
-  //       case enTipoCriterio.TipoMision:
-  //         state.lanzamientos = [...state.cache.lanzamientos.filter(l => l.missionType === Number(action.payload))];
-  //         break;
-  //     }
-  return { ...state };
-  //   break;
-  // }
-
-}
 
 /// ISA is an acronim of International Space Agency (Dedicater to my dear aunt Isabel)
 export interface ICache {
@@ -74,13 +7,6 @@ export interface ICache {
   agencias: Selopt[];
   tiposMision: Selopt[];
   lanzamientos: Lanzamiento[];
-}
-
-
-export enum enTipoCriterio {
-  Estado,
-  Agencia,
-  TipoMision
 }
 
 export interface Selopt {
@@ -96,3 +22,63 @@ export interface Lanzamiento {
   missionType: number;
 }
 
+export enum enTipoCriterio {
+  Estado,
+  Agencia,
+  TipoMision
+}
+export interface State {
+  cargado: boolean;
+  // Valores expuestos por el store
+  tipoCriterio: enTipoCriterio;
+  criterio: number;
+  criterios: Selopt[];
+  lanzamientos: Lanzamiento[];
+}
+
+export const initialState: State = {
+  cargado: false,
+  tipoCriterio: -1,
+  criterio: -1,
+  criterios: [],
+  lanzamientos: [],
+};
+
+export function reducer(state = initialState, action: IsaActions): State {
+  switch (action.type) {
+
+    case IsaActionTypes.CambiarTipoCriterio:
+      state.tipoCriterio = action.payload;
+      return state;
+
+    case IsaActionTypes.TipoCriterioCambiado:
+      state.criterios = action.payload.map(d => ({
+        value: d.id, viewValue: d.id + ' - ' + d.name
+      }));
+      return { ...state };
+
+    case IsaActionTypes.CambiarCriterio:
+      state.criterio = action.payload;
+      return state;
+
+    case IsaActionTypes.CriterioCambiado:
+      let ls: any;
+      switch (state.tipoCriterio) {
+        case enTipoCriterio.Estado:
+          ls = action.payload.filter(l => l.status === Number(state.criterio));
+          break;
+        case enTipoCriterio.Agencia:
+          ls = action.payload.filter(l => l.rocket.agencies[0].id === Number(state.criterio));
+          break;
+        case enTipoCriterio.TipoMision:
+          ls = action.payload.filter(l => l.missionType === state.criterio);
+          break;
+      }
+      // console.log(ls.length);
+      state.lanzamientos = ls.map((d: any) => ({
+        value: d.id, viewValue: d.id + ' - ' + d.name
+      }));
+      console.log(state.lanzamientos.length);
+      return { ...state };
+  }
+}
