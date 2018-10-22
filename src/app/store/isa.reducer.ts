@@ -16,6 +16,7 @@ export function reducer(state = initialState, action: IsaActions): State {
       return { ...state };
 
     case IsaActionTypes.CambiarCriterio:
+      state.cargado = false;
       state.criterio = action.payload;
       return state;
 
@@ -41,6 +42,7 @@ export function reducer(state = initialState, action: IsaActions): State {
         missionType: tipoMision(l),
         urlFoto: foto(l)
       }));
+      state.cargado = true;
       console.log(state.lanzamientos.length);
       return { ...state };
   }
