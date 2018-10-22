@@ -1,5 +1,5 @@
 import { Action } from '@ngrx/store';
-import { enTipoCriterio, Selopt, Lanzamiento } from './isa.reducer';
+import { enTipoCriterio, Selopt, Lanzamiento } from './isa.models';
 
 export enum IsaActionTypes {
   CambiarTipoCriterio = '[Isa] CambiarTipoCriterio',

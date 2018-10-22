@@ -1,4 +1,3 @@
-
 import {
   ActionReducer,
   ActionReducerMap,
@@ -7,11 +6,12 @@ import {
   MetaReducer
 } from '@ngrx/store';
 import * as fromIsa from '../store/isa.reducer';
+import * as fromIsaM from '../store/isa.models';
 import { environment } from '../../environments/environment';
 
 
 export interface State {
-  isa: fromIsa.State;
+  isa: fromIsaM.State;
 }
 
 export const reducers: ActionReducerMap<State> = {

@@ -5,11 +5,9 @@
         "ng": "ng",
         "start": "ng serve",
         "build": "ng build",
-
         "prod": "ng build --prod",
         "http": "cd ./dist/material-speed && http-server -c-1",
         "prehttp": "ng build --prod ",
-
         "test": "ng test",
         "lint": "ng lint",
         "e2e": "ng e2e"

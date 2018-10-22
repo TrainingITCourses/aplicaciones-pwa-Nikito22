@@ -1,6 +1,7 @@
-<div>
+ <div *ngIf="isa$ | async as isa">
     <ol>
-        <li *ngFor="let l of (isa$ | async).lanzamientos">
+        <li *ngFor="let l of isa.lanzamientos">
+            <!-- <img src='{{l.urlFoto}}'> -->
             {{l.name}} <span>{{l.launchDate}}</span>
         </li>
     </ol>

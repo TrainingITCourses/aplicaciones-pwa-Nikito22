@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Actions, Effect } from '@ngrx/effects';
 import { mergeMap, map, catchError, switchMap } from 'rxjs/operators';
 import { of, forkJoin } from 'rxjs';
-import { enTipoCriterio, Selopt } from './isa.reducer';
+import { enTipoCriterio, Selopt } from './isa.models';
 import { ApiService } from './api.service';
 
 @Injectable()

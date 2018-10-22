@@ -10,12 +10,10 @@ import { State } from '../../store/index';
 })
 export class LsBuscadorLanzamientosComponent implements OnInit {
 
-  public isa$: Observable<any>;
+  public isa$: Observable<any> = this.store.select('isa');
 
   constructor(public store: Store<State>) { }
 
-  ngOnInit() {
-    this.isa$ = this.store.select('isa');
-  }
+  ngOnInit() { }
 
 }
