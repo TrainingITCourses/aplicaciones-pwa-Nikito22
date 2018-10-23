@@ -10,9 +10,11 @@ export class ApiService {
   private url = 'https://launchlibrary.net/1.4/launch/1950-01-01?limit=2000';
   private p = environment.url + '/assets/json/';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    // this.url = this.p + 'launchlibrary.json';
+   }
 
-  public getLaunches$ = () => this.http.get(this.p + 'launchlibrary.json')
+  public getLaunches$ = () => this.http.get(this.url)
     .pipe(map((res: any) => res.launches))
 
   public getAgencies$ = () => this.http.get(this.p + 'launchagencies.json')

@@ -22,6 +22,7 @@ export interface State {
   tipoCriterio: enTipoCriterio;
   criterio: number;
   criterios: Selopt[];
+  _lanzamientos: Lanzamiento[];
   lanzamientos: Lanzamiento[];
 }
 export const initialState: State = {
@@ -29,5 +30,17 @@ export const initialState: State = {
   tipoCriterio: -1,
   criterio: -1,
   criterios: [],
+  _lanzamientos: [],
   lanzamientos: [],
 };
+export function agencia(l: any): number {
+  return l.rocket ? l.rocket.agencies ? l.rocket.agencies.length > 0 ? l.rocket.agencies[0].id : 0 : 0 : 0;
+}
+
+export function urlFoto(l: any): string {
+  return l.rocket ? l.rocket.imageURL : '';
+}
+
+export function tipoMision(d: any): number {
+  return d.missions ? d.missions.length > 0 ? d.missions[0].type : 0 : 0;
+}

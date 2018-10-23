@@ -1,9 +1,18 @@
 import { IsaActionTypes, IsaActions } from './isa.actions';
-import { initialState, State, enTipoCriterio, Lanzamiento } from './isa.models';
+import { initialState, State, enTipoCriterio } from './isa.models';
 import { formattedError } from '@angular/compiler';
 
 export function reducer(state = initialState, action: IsaActions): State {
   switch (action.type) {
+
+    case IsaActionTypes.CargarLanzamientos:
+      state.cargado = false;
+      return state;
+
+    case IsaActionTypes.LanzamientosCargados:
+      state.cargado = true;
+      state._lanzamientos = action.payload;
+      return { ...state};
 
     case IsaActionTypes.CambiarTipoCriterio:
       state.tipoCriterio = action.payload;
@@ -16,46 +25,20 @@ export function reducer(state = initialState, action: IsaActions): State {
       return { ...state };
 
     case IsaActionTypes.CambiarCriterio:
-      state.cargado = false;
       state.criterio = action.payload;
-      return state;
-
-    case IsaActionTypes.CriterioCambiado:
-      let ls: any;
       switch (state.tipoCriterio) {
         case enTipoCriterio.Estado:
-          ls = action.payload.filter(l => l.status === Number(state.criterio));
+          state.lanzamientos = state._lanzamientos.filter(l => l.status === Number(state.criterio));
           break;
         case enTipoCriterio.Agencia:
-          ls = action.payload.filter(l => agencia(l) === Number(state.criterio));
+          state.lanzamientos = state._lanzamientos.filter(l => l.agencyId === Number(state.criterio));
           break;
         case enTipoCriterio.TipoMision:
-          ls = action.payload.filter(l => tipoMision(l) === Number(state.criterio));
+          state.lanzamientos = state._lanzamientos.filter(l => l.missionType === Number(state.criterio));
           break;
       }
-      // console.log(ls.length);
-      state.lanzamientos = ls.map((l: any) => ({
-        name: l.name,
-        launchDate: l.windowstart,
-        status: l.status,
-        agencyId: agencia(l),
-        missionType: tipoMision(l),
-        urlFoto: foto(l)
-      }));
-      state.cargado = true;
       console.log(state.lanzamientos.length);
-      return { ...state };
+      return { ...state } ;
   }
 
-  function agencia(l: any): number {
-    return l.rocket ? l.rocket.agencies ? l.rocket.agencies.length > 0 ? l.rocket.agencies[0].id : 0 : 0 : 0;
-  }
-
-  function foto(l: any): string {
-    return l.rocket ? l.rocket.imageURL : '';
-  }
-
-  function tipoMision(d: any): number {
-    return d.missions ? d.missions.length > 0 ? d.missions[0].type : 0 : 0;
-  }
 }
