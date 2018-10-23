@@ -12,7 +12,7 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  public getLaunches$ = () => this.http.get(this.url)
+  public getLaunches$ = () => this.http.get(this.p + 'launchlibrary.json')
     .pipe(map((res: any) => res.launches))
 
   public getAgencies$ = () => this.http.get(this.p + 'launchagencies.json')

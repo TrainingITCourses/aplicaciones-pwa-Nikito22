@@ -1,11 +1,4 @@
 /// ISA is an acronim of International Space Agency (Dedicater to my dear aunt Isabel)
-export interface ICache {
-  tiposCriterios: string[];
-  estados: Selopt[];
-  agencias: Selopt[];
-  tiposMision: Selopt[];
-  lanzamientos: Lanzamiento[];
-}
 export interface Selopt {
   value: string;
   viewValue: string;

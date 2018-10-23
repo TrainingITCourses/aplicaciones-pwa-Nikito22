@@ -1,11 +1,11 @@
- <div *ngIf="(isa$ | async).cargado; else esperandoLanzamientos">
-    <ol>
-        <li *ngFor="let l of (isa$ | async).lanzamientos">
-            <!-- <img src='{{l.urlFoto}}'> -->
-            {{l.name}} <span>{{l.launchDate}}</span>
-        </li>
-    </ol>
+<div *ngIf="(isa$ | async)?.cargado; else esperandoLanzamientos">
+  <ol>
+    <li *ngFor="let l of (isa$ | async).lanzamientos">
+      <!-- <img src='{{l.urlFoto}}'> -->
+      {{l.name}} <span>{{l.launchDate}}</span>
+    </li>
+  </ol>
 </div>
 <ng-template #esperandoLanzamientos>
-    Esperando lanzamientos ...
+  Esperando lanzamientos ...
 </ng-template>

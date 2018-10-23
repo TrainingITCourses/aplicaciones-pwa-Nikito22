@@ -1,4 +1,6 @@
 <span>
+  <h1>My PWA Lanzamientos</h1>
+  <!-- <img src="https://images.freeimages.com/images/large-previews/41b/rocket-1420692.jpg"> -->
   <label>Buscar por: </label>
   <select [value]="-1" (change)="alCambiarTipoCriterio($event)">
     <option *ngFor="let e of tiposCriterios" [value]="e">{{e}}</option>
